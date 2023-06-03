@@ -104,11 +104,7 @@ require_once "sidebar.php";
                                                 <input type="text" class="form-control" name="apassword"
                                                     placeholder="Agent password">
                                             </div>
-                                            <div class="col">
-                                                <label class="form-label">Status</label>
-                                                <input type="text" class="form-control" name="astatus"
-                                                    placeholder="Agent status">
-                                            </div>
+                                           
                                         </div>
 
                                         <div>
@@ -148,14 +144,15 @@ if (isset($_POST['submit'])) {
     $abranch = $_POST['abranch'];
     $ausername = $_POST['ausername'];
     $apassword = $_POST['apassword'];
-    $astatus = $_POST['astatus'];
 
-    $insert_query = "INSERT INTO `tbl_agent`(`name`, `email`, `phone_no`, `address`, `city`, `branch`, `user_name`, `password`, `status`) VALUES ('$aname','$aemail','$aphone','$aaddress','$acity','$abranch','$ausername','$apassword','$astatus')";
+
+    $insert_query = "INSERT INTO `tbl_agent`(`name`, `email`, `phone_no`, `address`, `city`, `branch`, `user_name`, `password`) VALUES ('$aname','$aemail','$aphone','$aaddress','$acity','$abranch','$ausername','$apassword')";
 
     $execute_query = mysqli_query($connect, $insert_query);
 
     if ($execute_query) {
-        header("Location: agent_Read.php?msg=New record created successfully");
+        $_SESSION["msg"]="Agent Added Successfully";
+        header("Location: agent_Read.php");
     } else {
         echo "Failed: " . mysqli_error($connect);
     }

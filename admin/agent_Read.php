@@ -2,12 +2,14 @@
 require_once "sidebar.php";
 ?>
 <?php
-if (isset($_GET["msg"])) {
-  $msg = $_GET["msg"];
+if (isset($_SESSION["msg"])) {
+  $msg = $_SESSION["msg"];
   echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      ' . $msg . '
+      ' . $msg  . '
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>';
+
+    unset($_SESSION["msg"]);
 }
 ?>
 <!DOCTYPE html>
@@ -43,15 +45,14 @@ if (isset($_GET["msg"])) {
                     <thead class="table-success">
                       <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Agent Name</th>
-                        <th scope="col">Agent Email</th>
-                        <th scope="col">Agent Phone no</th>
-                        <th scope="col">Agent Address</th>
-                        <th scope="col">Agent City</th>
-                        <th scope="col">Agent Branch</th>
-                        <th scope="col">Agent User name</th>
-                        <th scope="col">Agent Passwoard</th>
-                        <th scope="col">Agent User Status</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone no</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">User name</th>
+                        <th scope="col">Passwoard</th>
+                        <th scope="col">Agent Status</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
@@ -77,15 +78,13 @@ if (isset($_GET["msg"])) {
                             <td>
                               <?php echo $row["phone_no"] ?>
                             </td>
-                            <td>
-                              <?php echo $row["address"] ?>
-                            </td>
+                            
                             <td>
                               <?php echo $row["city"] ?>
                             </td>
                             <td>
                             <?php
-                                                    $fetch_branch = "SELECT * FROM `tbl_branch` ";
+                                                    $fetch_branch = "SELECT * FROM `tbl_branch` where id = $row[branch] ";
                                                     $run_query = mysqli_query($connect,$fetch_branch);
                                                     if (mysqli_num_rows($run_query) > 0) { 
                                                     $data = mysqli_fetch_array($run_query) ?>

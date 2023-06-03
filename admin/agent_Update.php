@@ -1,5 +1,6 @@
 <?php
 ob_start();
+
 require_once "sidebar.php";
 $id = $_GET['id'];
 if (isset($_POST['submit'])) {
@@ -18,7 +19,8 @@ if (isset($_POST['submit'])) {
     $execute_query = mysqli_query($connect, $update_query);
 
     if ($execute_query) {
-        header("Location: agent_read.php?msg=Data updated successfully");
+        $_SESSION["msg"] = "Data Updated";
+        header("Location: agent_read.php");
     } else {
         echo "Failed: " . mysqli_error($connect);
     }
@@ -100,7 +102,7 @@ $row = mysqli_fetch_assoc($execute_select);
                                                 <label class="form-label">Branch</label>
                                                 <select name="abranch" id="" class="form-control">
                                                 <?php
-                                                    $fetch_branch = "SELECT * FROM `tbl_branch`";
+                                                    $fetch_branch = "SELECT * FROM `tbl_branch` where id = '$row[branch]'";
                                                     $run_query = mysqli_query($connect,$fetch_branch);
                                                     if (mysqli_num_rows($run_query) > 0) {
                                                         while ($data = mysqli_fetch_array($run_query)) {

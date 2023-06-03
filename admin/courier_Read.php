@@ -44,25 +44,22 @@ if (isset($_GET["msg"])) {
                       <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Track Number</th>
-                        <th scope="col">Branch Id</th>
-                        <th scope="col">Shipment Date</th>
+                        <!-- <th scope="col">Branch Id</th>
+                        <th scope="col">Shipment Date</th> -->
                         <th scope="col">Sender Name</th>
-                        <th scope="col">Sender City</th>
-                        <th scope="col">Sender Address</th>
+                        <!-- <th scope="col">Sender City</th> -->
+                        <!-- <th scope="col">Sender Address</th> -->
                         <th scope="col">Sender Phone no</th>
-                        <th scope="col">Sender Email</th>
+                        <!-- <th scope="col">Sender Email</th> -->
                         <th scope="col">Receiver Name</th>
-                        <th scope="col">Receiver City</th>
-                        <th scope="col">Receiver Address</th>
                         <th scope="col">Receiver Phone no</th>
-                        <th scope="col">Receiver Email</th>
                         <th scope="col">Shipment Status</th>
-                        <th scope="col">No Of parcel</th>
+                        <!-- <th scope="col">No Of parcel</th>
                         <th scope="col">Parcel Length</th>
                         <th scope="col">Parcel width</th>
                         <th scope="col">Parcel Height</th>
                         <th scope="col">Parcel Weight</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Description</th> -->
                         <th scope="col">Delivery Charges</th>
                         <th scope="col">Total Charges</th>
                         <th scope="col"></th>
@@ -85,61 +82,19 @@ if (isset($_GET["msg"])) {
                               <?php echo $row["track_number"] ?>
                             </td>
                             <td>
-                              <?php echo $row["branch_id"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["shipment_date"] ?>
-                            </td>
-                            <td>
                               <?php echo $row["sender_name"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["sender_city"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["sender_address"] ?>
                             </td>
                             <td>
                               <?php echo $row["sender_phone_no"] ?>
                             </td>
                             <td>
-                              <?php echo $row["sender_email"] ?>
-                            </td>
-                            <td>
                               <?php echo $row["receiver_name"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["receiver_city"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["receiver_address"] ?>
                             </td>
                             <td>
                               <?php echo $row["receiver_phone_no"] ?>
                             </td>
                             <td>
-                              <?php echo $row["receiver_email"] ?>
-                            </td>
-                            <td>
                               <?php echo $row["shipment_status"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["no_of_parcel"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["parcel_length"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["parcel_width"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["parcel_height"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["parcel_weight"] ?>
-                            </td>
-                            <td>
-                              <?php echo $row["description"] ?>
                             </td>
                             <td>
                               <?php echo number_format($row["delivery_charges"], 2, '.', ',') . " Rs" ; ?>

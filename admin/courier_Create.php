@@ -130,12 +130,6 @@ require_once "sidebar.php";
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col">
-                                                <label class="form-label">Shipment status</label>
-                                                <input type="text" class="form-control" name="shipment_status"
-                                                    placeholder="">
-                                            </div>
-
-                                            <div class="col">
                                                 <label class="form-label">No of parcel</label>
                                                 <input type="number" min="1" class="form-control" name="no_of_parcel"
                                                     placeholder="">
@@ -145,14 +139,11 @@ require_once "sidebar.php";
                                                 <input type="number" min="1" class="form-control" name="parcel_length"
                                                     placeholder="">
                                             </div>
-                                        </div>
-                                        <div class="row mb-3">
                                             <div class="col">
                                                 <label class="form-label">Parcel width</label>
                                                 <input type="number" min="1" class="form-control" name="parcel_width"
                                                     placeholder="">
                                             </div>
-
                                             <div class="col">
                                                 <label class="form-label">Parcel height</label>
                                                 <input type="number" min="1" class="form-control" name="parcel_height"
@@ -163,6 +154,8 @@ require_once "sidebar.php";
                                                 <input type="number" min="1" class="form-control" name="parcel_weight"
                                                     placeholder="">
                                             </div>
+                                        </div>
+                                        <div class="row mb-3">  
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col">
@@ -235,7 +228,7 @@ if (isset($_POST['submit'])) {
     $delivery_charges = $_POST['delivery_charges'];
     $total_charges = $_POST['total_charges'];
 
-    $insert_query = "INSERT INTO `tbl_courier`(`track_number`, `branch_id`, `shipment_date`, `sender_name`, `sender_city`, `sender_address`, `sender_phone_no`, `sender_email`, `receiver_name`, `receiver_city`, `receiver_address`, `receiver_phone_no`, `receiver_email`, `shipment_status`, `no_of_parcel`, `parcel_length`, `parcel_width`, `parcel_height`, `parcel_weight`, `description`, `delivery_charges`, `total_charges`) VALUES ('$track_number','$branch_id','$shipment_date','$sender_name','$sender_city','$sender_address','$sender_phone_no','$sender_email','$receiver_name','$receiver_city','$receiver_address','$receiver_phone_no','$receiver_email','$shipment_status','$no_of_parcel','$parcel_length','$parcel_width','$parcel_height','$parcel_weight','$description','$delivery_charges','$total_charges')";
+    $insert_query = "INSERT INTO `tbl_courier`(`track_number`, `branch_id`, `shipment_date`, `sender_name`, `sender_city`, `sender_address`, `sender_phone_no`, `sender_email`, `receiver_name`, `receiver_city`, `receiver_address`, `receiver_phone_no`, `receiver_email`, `no_of_parcel`, `parcel_length`, `parcel_width`, `parcel_height`, `parcel_weight`, `description`, `delivery_charges`, `total_charges`) VALUES ('$track_number','$branch_id','$shipment_date','$sender_name','$sender_city','$sender_address','$sender_phone_no','$sender_email','$receiver_name','$receiver_city','$receiver_address','$receiver_phone_no','$receiver_email','$no_of_parcel','$parcel_length','$parcel_width','$parcel_height','$parcel_weight','$description','$delivery_charges','$total_charges')";
 
     $execute_query = mysqli_query($connect, $insert_query);
 
