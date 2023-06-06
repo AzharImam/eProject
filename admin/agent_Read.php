@@ -53,6 +53,7 @@ if (isset($_SESSION["msg"])) {
                         <th scope="col">Branch</th>
                         <th scope="col">User name</th>
                         <th scope="col">Passwoard</th>
+                        <th scope="col">Agent Image</th>
                         <th scope="col">Agent Status</th>
                         <th scope="col"></th>
                       </tr>
@@ -96,6 +97,9 @@ if (isset($_SESSION["msg"])) {
                             </td>
                             <td>
                               <?php echo $row["password"] ?>
+                            </td>
+                            <td>
+                             <img src="<?php echo $row["image"] ?>" alt="">  
                             </td>
                             <td>
                               <?php echo $row["status"] ?>
