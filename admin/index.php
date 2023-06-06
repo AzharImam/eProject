@@ -12,12 +12,12 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-1">
-                                    <i class="pe-7s-cash"></i>
+                                    <i class="fa fa-industry"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
                                         <div class="stat-text">$<span class="count">23569</span></div>
-                                        <div class="stat-heading">Revenue</div>
+                                        <div class="stat-heading">Branches</div>
                                     </div>
                                 </div>
                             </div>
@@ -30,12 +30,12 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-2">
-                                    <i class="pe-7s-cart"></i>
+                                    <i class="fa fa-truck"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
                                         <div class="stat-text"><span class="count">3435</span></div>
-                                        <div class="stat-heading">Sales</div>
+                                        <div class="stat-heading">Courier</div>
                                     </div>
                                 </div>
                             </div>
@@ -66,12 +66,19 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-4">
-                                    <i class="pe-7s-users"></i>
+                                    <i class="fa fa-user-secret"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">2986</span></div>
-                                        <div class="stat-heading">Clients</div>
+                                        <div class="stat-text"><span class="count">
+                                            <?php 
+                                            $select_agent = "SELECT * FROM `tbl_agent`";
+                                            $select_query = mysqli_query($connect , $select_agent );
+                                            $count_agent = mysqli_num_rows($select_query);
+                                            echo $count_agent;                                            
+                                            ?>
+                                        </span></div>
+                                        <div class="stat-heading">Agents</div>
                                     </div>
                                 </div>
                             </div>

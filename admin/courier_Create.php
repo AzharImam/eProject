@@ -36,13 +36,13 @@ require_once "sidebar.php";
                                             <div class="col">
                                                 <label class="form-label">Track number</label>
                                                 <input type="number" min="0" class="form-control" name="track_number"
-                                                    placeholder="">
+                                                    value="<?php $digits = 3;
+                                                    echo rand(pow(10, $digits - 1), pow(10, $digits) - 1); ?>" placeholder="">
                                             </div>
 
                                             <div class="col">
-                                                <label class="form-label">Branch id</label>
-                                                <input type="number" min="0" class="form-control" name="branch_id"
-                                                    placeholder="">
+                                                <label class="form-label">Branch id/name</label>
+                                                <input type="text" class="form-control" name="branch_id" placeholder="">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -58,8 +58,7 @@ require_once "sidebar.php";
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">Sender city</label>
-                                                <select name="sender_city" id="" class="form-control">
-                                                    <option value="" selected disabled>Select city</option>
+                                                <select name="sender_city" id="" required class="form-control">
                                                     <option value="" selected disabled>Select city</option>
                                                     <option value="Karachi">Karachi</option>
                                                     <option value="Lahore">Lahore</option>
@@ -67,6 +66,8 @@ require_once "sidebar.php";
                                                     <option value="Peshawar">Peshawar</option>
                                                     <option value="Faisalabad">Faisalabad</option>
                                                     <option value="Multan">Multan</option>
+                                                    <option value="Gujranwala">Gujranwala</option>
+                                                    <option value="Rawalpindi">Rawalpindi</option>
                                                     <option value="Quetta">Quetta</option>
                                                 </select>
                                             </div>
@@ -87,7 +88,7 @@ require_once "sidebar.php";
                                         <div class="row mb-3">
                                             <div class="col">
                                                 <label class="form-label">Sender email</label>
-                                                <input type="email" class="form-control" name="sender_email"
+                                                <input type="text" class="form-control" name="sender_email"
                                                     placeholder="">
                                             </div>
 
@@ -98,7 +99,7 @@ require_once "sidebar.php";
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">Receiver city</label>
-                                                <select name="receiver_city" id="" class="form-control">
+                                                <select name="receiver_city" id="" required class="form-control">
                                                     <option value="" selected disabled>Select city</option>
                                                     <option value="Karachi">Karachi</option>
                                                     <option value="Lahore">Lahore</option>
@@ -106,6 +107,8 @@ require_once "sidebar.php";
                                                     <option value="Peshawar">Peshawar</option>
                                                     <option value="Faisalabad">Faisalabad</option>
                                                     <option value="Multan">Multan</option>
+                                                    <option value="Gujranwala">Gujranwala</option>
+                                                    <option value="Rawalpindi">Rawalpindi</option>
                                                     <option value="Quetta">Quetta</option>
                                                 </select>
                                             </div>
@@ -124,7 +127,7 @@ require_once "sidebar.php";
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">Receiver email</label>
-                                                <input type="email" class="form-control" name="receiver_email"
+                                                <input type="text" class="form-control" name="receiver_email"
                                                     placeholder="">
                                             </div>
                                         </div>
@@ -155,10 +158,10 @@ require_once "sidebar.php";
                                                     placeholder="">
                                             </div>
                                         </div>
-                                        <div class="row mb-3">  
+                                        <div class="row mb-3">
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col">
+                                            <div class="col-6">
                                                 <label class="form-label">Description</label>
                                                 <input type="text" class="form-control" name="description"
                                                     placeholder="">
@@ -233,7 +236,8 @@ if (isset($_POST['submit'])) {
     $execute_query = mysqli_query($connect, $insert_query);
 
     if ($execute_query) {
-        header("Location: courier_Read.php?msg=New record created successfully");
+        $_SESSION["msg"] = "Courier added successfully";
+        header("Location: courier_Read.php");
     } else {
         echo "Failed: " . mysqli_error($connect);
     }

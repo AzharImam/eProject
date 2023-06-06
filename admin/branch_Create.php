@@ -36,13 +36,23 @@ require_once "sidebar.php";
                                             <div class="col">
                                                 <label class="form-label">Name</label>
                                                 <input type="text" class="form-control" name="bname"
-                                                    placeholder="Branch name">
+                                                    placeholder="Enter name">
                                             </div>
 
                                             <div class="col">
                                                 <label class="form-label">City</label>
-                                                <input type="text" class="form-control" name="bcity"
-                                                    placeholder="Branch city">
+                                                <select name="bcity" id="" required class="form-control">
+                                                    <option value="" selected disabled>Select city</option>
+                                                    <option value="Karachi">Karachi</option>
+                                                    <option value="Lahore">Lahore</option>
+                                                    <option value="Islamabad">Islamabad</option>
+                                                    <option value="Peshawar">Peshawar</option>
+                                                    <option value="Faisalabad">Faisalabad</option>
+                                                    <option value="Multan">Multan</option>
+                                                    <option value="Gujranwala">Gujranwala</option>
+                                                    <option value="Rawalpindi">Rawalpindi</option>
+                                                    <option value="Quetta">Quetta</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -50,13 +60,13 @@ require_once "sidebar.php";
                                             <div class="col">
                                                 <label class="form-label">Address</label>
                                                 <input type="text" class="form-control" name="baddress"
-                                                    placeholder="Branch address">
+                                                    placeholder="Enter address">
                                             </div>
 
                                             <div class="col">
                                                 <label class="form-label">Contact no</label>
                                                 <input type="text" class="form-control" name="bcontact"
-                                                    placeholder="Branch contact no">
+                                                    placeholder="Enter contact no">
                                             </div>
                                         </div>
 
@@ -99,7 +109,8 @@ if (isset($_POST['submit'])) {
     $execute_query = mysqli_query($connect, $insert_query);
 
     if ($execute_query) {
-        header("Location: branch_Read.php?msg=New record created successfully");
+        $_SESSION["msg"] = "Branch added successfully";
+        header("Location: branch_Read.php");
     } else {
         echo "Failed: " . mysqli_error($connect);
     }

@@ -13,7 +13,8 @@ if (isset($_POST['submit'])) {
     $execute_query = mysqli_query($connect, $update_query);
 
     if ($execute_query) {
-        header("Location: branch_Read.php?msg=Data updated successfully");
+        $_SESSION["msg"] = "Data updated";
+        header("Location: branch_Read.php?");
     } else {
         echo "Failed: " . mysqli_error($connect);
     }
@@ -63,8 +64,18 @@ $row = mysqli_fetch_assoc($execute_select);
 
                                             <div class="col">
                                                 <label class="form-label">City</label>
-                                                <input type="text" class="form-control" name="bcity"
-                                                    value="<?php echo $row['city'] ?>" placeholder="Branch city">
+                                                <select name="bcity" id="" class="form-control">
+                                                    <option value="<?php echo $row['city'] ?>" selected><?php echo $row['city'] ?></option>
+                                                    <option value="Karachi">Karachi</option>
+                                                    <option value="Lahore">Lahore</option>
+                                                    <option value="Islamabad">Islamabad</option>
+                                                    <option value="Peshawar">Peshawar</option>
+                                                    <option value="Faisalabad">Faisalabad</option>
+                                                    <option value="Multan">Multan</option>
+                                                    <option value="Gujranwala">Gujranwala</option>
+                                                    <option value="Rawalpindi">Rawalpindi</option>
+                                                    <option value="Quetta">Quetta</option>
+                                                </select>
                                             </div>
                                         </div>
 

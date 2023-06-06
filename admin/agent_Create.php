@@ -36,44 +36,45 @@ require_once "sidebar.php";
                                             <div class="col">
                                                 <label class="form-label">Name</label>
                                                 <input type="text" class="form-control" name="aname"
-                                                    placeholder="Agent name">
+                                                    placeholder="Enter name">
                                             </div>
 
                                             <div class="col">
                                                 <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" required name="aemail"
-                                                    placeholder="Agent email">
+                                                <input type="text" class="form-control" name="aemail"
+                                                    placeholder="Enter email">
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <label class="form-label">Phone no</label>
-                                                <input type="text" class="form-control" name="aphone"
-                                                    placeholder="Agent phone no">
-                                            </div>
-
+                                        <!-- <div class="row mb-3">
                                             <div class="col">
                                                 <label class="form-label">Address</label>
                                                 <input type="text" class="form-control" name="aaddress"
-                                                    placeholder="Agent address">
+                                                    placeholder="Enter address">
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="row mb-3">
-                                            <div class="col">
+                                            <!-- <div class="col">
                                                 <label class="form-label">City</label>
                                                 <input type="text" class="form-control" name="acity"
-                                                    placeholder="Agent city">
+                                                    placeholder="Enter city">
+                                            </div> -->
+                                            <div class="col-6">
+                                                <label class="form-label">Phone no</label>
+                                                <input type="text" class="form-control" name="aphone"
+                                                    placeholder="Enter phone no">
                                             </div>
 
                                             <div class="col">
                                                 <label class="form-label">Branch</label>
-                                                <select name="abranch" id="" class="form-control">
+                                                <select name="abranch" id="" required class="form-control">
+                                                    <option value="" selected disabled>Select branch</option>
                                                     <?php
                                                     $fetch_branch = "SELECT * FROM `tbl_branch`";
                                                     $run_query = mysqli_query($connect, $fetch_branch);
                                                     if (mysqli_num_rows($run_query) > 0) {
                                                         while ($data = mysqli_fetch_array($run_query)) {
                                                             ?>
+
                                                             <option value="<?php echo $data[0] ?>">
                                                                 <?php echo $data[1] ?>
                                                             </option>
@@ -82,7 +83,7 @@ require_once "sidebar.php";
                                                         # code...
                                                     } else { ?>
                                                         <option value="">No Branch Found</option>
-                                                    <?php
+                                                        <?php
                                                     }
 
 
@@ -96,15 +97,15 @@ require_once "sidebar.php";
                                             <div class="col">
                                                 <label class="form-label">User name</label>
                                                 <input type="text" class="form-control" name="ausername"
-                                                    placeholder="Agent username">
+                                                    placeholder="Enter username">
                                             </div>
 
                                             <div class="col">
                                                 <label class="form-label">Password</label>
                                                 <input type="text" class="form-control" name="apassword"
-                                                    placeholder="Agent password">
+                                                    placeholder="Enter password">
                                             </div>
-                                           
+
                                         </div>
 
                                         <div>
@@ -139,19 +140,19 @@ if (isset($_POST['submit'])) {
     $aname = $_POST['aname'];
     $aemail = $_POST['aemail'];
     $aphone = $_POST['aphone'];
-    $aaddress = $_POST['aaddress'];
-    $acity = $_POST['acity'];
+    // $aaddress = $_POST['aaddress'];
+    // $acity = $_POST['acity'];
     $abranch = $_POST['abranch'];
     $ausername = $_POST['ausername'];
     $apassword = $_POST['apassword'];
 
 
-    $insert_query = "INSERT INTO `tbl_agent`(`name`, `email`, `phone_no`, `address`, `city`, `branch`, `user_name`, `password`) VALUES ('$aname','$aemail','$aphone','$aaddress','$acity','$abranch','$ausername','$apassword')";
+    $insert_query = "INSERT INTO `tbl_agent`(`name`, `email`, `phone_no`, `branch`, `user_name`, `password`) VALUES ('$aname','$aemail','$aphone','$abranch','$ausername','$apassword')";
 
     $execute_query = mysqli_query($connect, $insert_query);
 
     if ($execute_query) {
-        $_SESSION["msg"]="Agent Added Successfully";
+        $_SESSION["msg"] = "Agent added successfully";
         header("Location: agent_Read.php");
     } else {
         echo "Failed: " . mysqli_error($connect);

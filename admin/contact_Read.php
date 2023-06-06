@@ -1,6 +1,18 @@
 <?php
 require_once "sidebar.php";
 ?>
+<?php
+if (isset($_SESSION["msg"])) {
+  $msg = $_SESSION["msg"];
+  echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+      ' . $msg . '
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+
+  unset($_SESSION["msg"]);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,8 +81,8 @@ require_once "sidebar.php";
                             </td>
 
                             <td>
-                              <a class="remove" class="link-dark"><i class="fa fa-trash fs-5 me-3" role="button"
-                                  style="color: red"></i></a>
+                              <a href="?id=<?php echo $row["id"] ?>" class="remove" class="link-dark"><i
+                                  class="fa fa-trash fs-5 me-3" role="button" style="color: red"></i></a>
                             </td>
                           </tr>
                           <?php
@@ -117,7 +129,7 @@ require_once "sidebar.php";
           success: function (data) {
             $("#" + id).remove();
             // alert("Record removed successfully");
-            window.location.href = "contact_Read.php";
+            // window.location.href = "contact_Read.php";
           }
         });
       }

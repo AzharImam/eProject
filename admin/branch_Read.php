@@ -2,12 +2,14 @@
 require_once "sidebar.php";
 ?>
 <?php
-if (isset($_GET["msg"])) {
-  $msg = $_GET["msg"];
+if (isset($_SESSION["msg"])) {
+  $msg = $_SESSION["msg"];
   echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
       ' . $msg . '
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>';
+
+  unset($_SESSION["msg"]);
 }
 ?>
 <!DOCTYPE html>
@@ -80,8 +82,8 @@ if (isset($_GET["msg"])) {
                             <td>
                               <a href="branch_Update.php?id=<?php echo $row["id"] ?>" class="link-dark"><i
                                   class="fa fa-refresh fs-5 me-3" style="color: green"></i></a>
-                              <a class="remove" class="link-dark"><i class="fa fa-trash fs-5 me-3" role="button"
-                                  style="color: red"></i></a>
+                              <a href="?id=<?php echo $row["id"] ?>" class="remove" class="link-dark"><i
+                                  class="fa fa-trash fs-5 me-3" role="button" style="color: red"></i></a>
                             </td>
                           </tr>
                           <?php
@@ -129,6 +131,7 @@ if (isset($_GET["msg"])) {
             $("#" + id).remove();
             // alert("Record removed successfully");
             // window.location.href = "branch_Read.php";
+
           }
         });
       }

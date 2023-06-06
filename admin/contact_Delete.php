@@ -1,11 +1,13 @@
 <?php
 require_once "config.php";
+session_start();
 $id = $_GET["id"];
 $delete_query = "DELETE FROM `tbl_contact` WHERE id = $id";
 $delete_execute = mysqli_query($connect, $delete_query);
 
 if ($delete_execute) {
-  header("Location: contact_Read.php?msg=Data deleted successfully");
+  $_SESSION["msg"] = "Data deleted successfully";
+  header("Location: contact_Read.php");
 } else {
   echo "Failed: " . mysqli_error($conn);
 }
