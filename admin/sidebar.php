@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>Courier Management System</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -137,7 +137,7 @@ session_start();
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-address-book"></i>Services</a>
+                            aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Services</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-edit"></i><a href="#">Add service</a></li>
                             <li><i class="menu-icon fa fa-info"></i><a href="#">service details</a></li>

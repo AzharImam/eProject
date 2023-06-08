@@ -19,6 +19,38 @@ if (isset($_POST['submit'])) {
     $execute_query = mysqli_query($connect, $update_query);
 
     if ($execute_query) {
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["aimage"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Check file size
+        if ($_FILES["aimage"]["size"] > 500000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if (
+            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif"
+        ) {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["aimage"]["tmp_name"], $target_file)) {
+                echo "The file " . htmlspecialchars(basename($_FILES["aimage"]["name"])) . " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+
         $_SESSION["msg"] = "Data updated";
         header("Location: agent_Read.php");
     } else {
@@ -64,19 +96,16 @@ $row = mysqli_fetch_assoc($execute_select);
                                         <!-- <canvas id="TrafficChart"></canvas>   -->
 
                                         <div class="container d-flex justify-content-center">
-                                            <form action="" method="post" style="width:50vw; min-width:300px;">
+                                            <form action="" method="post" style="width:50vw; min-width:300px;" enctype="multipart/form-data">
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">Name</label>
-                                                        <input type="text" class="form-control" name="aname"
-                                                            value="<?php echo $row['name'] ?>" placeholder="Agent name">
+                                                        <input type="text" class="form-control" name="aname" value="<?php echo $row['name'] ?>" placeholder="Agent name">
                                                     </div>
 
                                                     <div class="col">
                                                         <label class="form-label">Email</label>
-                                                        <input type="text" class="form-control" name="aemail"
-                                                            value="<?php echo $row['email'] ?>"
-                                                            placeholder="Agent email">
+                                                        <input type="text" class="form-control" name="aemail" value="<?php echo $row['email'] ?>" placeholder="Agent email">
                                                     </div>
                                                 </div>
                                                 <!-- <div class="row mb-3">
@@ -94,9 +123,7 @@ $row = mysqli_fetch_assoc($execute_select);
                                             </div> -->
                                                     <div class="col">
                                                         <label class="form-label">Phone no</label>
-                                                        <input type="text" class="form-control" name="aphone"
-                                                            value="<?php echo $row['phone_no'] ?>"
-                                                            placeholder="Agent phone no">
+                                                        <input type="text" class="form-control" name="aphone" value="<?php echo $row['phone_no'] ?>" placeholder="Agent phone no">
                                                     </div>
 
                                                     <div class="col">
@@ -107,16 +134,16 @@ $row = mysqli_fetch_assoc($execute_select);
                                                             $run_query = mysqli_query($connect, $fetch_branch);
                                                             if (mysqli_num_rows($run_query) > 0) {
                                                                 while ($data = mysqli_fetch_array($run_query)) {
-                                                                    ?>
+                                                            ?>
                                                                     <option value="<?php echo $data[0] ?>">
                                                                         <?php echo $data[1] ?>
                                                                     </option>
-                                                                    <?php
+                                                                <?php
                                                                 }
                                                                 # code...
                                                             } else { ?>
                                                                 <option value="">No Branch Found</option>
-                                                                <?php
+                                                            <?php
                                                             }
 
 
@@ -128,34 +155,34 @@ $row = mysqli_fetch_assoc($execute_select);
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">User name</label>
-                                                        <input type="text" class="form-control" name="ausername"
-                                                            value="<?php echo $row['user_name'] ?>"
-                                                            placeholder="Agent username">
+                                                        <input type="text" class="form-control" name="ausername" value="<?php echo $row['user_name'] ?>" placeholder="Agent username">
                                                     </div>
 
                                                     <div class="col">
                                                         <label class="form-label">Password</label>
-                                                        <input type="text" class="form-control" name="apassword"
-                                                            value="<?php echo $row['password'] ?>"
-                                                            placeholder="Agent password">
+                                                        <input type="text" class="form-control" name="apassword" value="<?php echo $row['password'] ?>" placeholder="Agent password">
                                                     </div>
-                                                    
                                                 </div>
+                                                
                                                 <div class="row mb-3">
+                                                    <div class="col-6">
+                                                        <label class="form-label">Image</label>
+                                                        <input type="file" class="form-control" name="aimage">
+                                                        <img src="uploads/<?php echo $row["image"] ?>" alt="" style="height: 100px;">
+
+                                                    </div>
                                                     <div class="col-6">
                                                         <label class="form-label">Status</label>
                                                         <select name="astatus" id="" required class="form-control">
-                                                            <option value="<?php echo $row['status'] ?>" selected
-                                                                ><?php echo $row['status'] ?></option>
-                                                                <option value="Not Working">Not working</option>
+                                                            <option value="<?php echo $row['status'] ?>" selected><?php echo $row['status'] ?></option>
+                                                            <option value="Not Working">Not working</option>
                                                             <option value="Working">Working</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div>
-                                                    <button type="submit" class="btn btn-success"
-                                                        name="submit">Save</button>
+                                                    <button type="submit" class="btn btn-success" name="submit">Save</button>
                                                     <a href="agent_Read.php" class="btn btn-danger">Cancel</a>
                                                 </div>
                                             </form>
