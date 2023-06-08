@@ -11,9 +11,10 @@ if (isset($_POST['submit'])) {
     $abranch = $_POST['abranch'];
     $ausername = $_POST['ausername'];
     $apassword = $_POST['apassword'];
+    $aimage = $_FILES['aimage']['name'];
     $astatus = $_POST['astatus'];
 
-    $update_query = "UPDATE `tbl_agent` SET `name`='$aname',`email`='$aemail',`phone_no`='$aphone',`branch`='$abranch',`user_name`='$ausername',`password`='$apassword',`status`='$astatus' WHERE `id`='$id'";
+    $update_query = "UPDATE `tbl_agent` SET `name`='$aname',`email`='$aemail',`phone_no`='$aphone',`branch`='$abranch',`user_name`='$ausername',`password`='$apassword',`image`='$aimage',`status`='$astatus' WHERE `id`='$id'";
 
     $execute_query = mysqli_query($connect, $update_query);
 
@@ -138,7 +139,10 @@ $row = mysqli_fetch_assoc($execute_select);
                                                             value="<?php echo $row['password'] ?>"
                                                             placeholder="Agent password">
                                                     </div>
-                                                    <div class="col">
+                                                    
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-6">
                                                         <label class="form-label">Status</label>
                                                         <select name="astatus" id="" required class="form-control">
                                                             <option value="<?php echo $row['status'] ?>" selected

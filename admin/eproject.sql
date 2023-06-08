@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2023 at 04:28 AM
+-- Generation Time: Jun 08, 2023 at 07:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -37,6 +37,7 @@ CREATE TABLE `tbl_agent` (
   `branch` int(11) NOT NULL,
   `user_name` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'Not working'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,10 +45,11 @@ CREATE TABLE `tbl_agent` (
 -- Dumping data for table `tbl_agent`
 --
 
-INSERT INTO `tbl_agent` (`id`, `name`, `email`, `phone_no`, `address`, `city`, `branch`, `user_name`, `password`, `status`) VALUES
-(1, 'Waiz Ali', 'waiz@gmail.com', '01234', '', '', 1, 'waizali', '1234', 'Not working'),
-(2, 'Maaz Khan', 'maaz@gmail.com', '01234', '', '', 2, 'maazkhan', '1234', 'Not working'),
-(3, 'Saleem Khan', 'saleem@gmail.com', '01234', '', '', 3, 'saleemkhan', '1234', 'Not Working');
+INSERT INTO `tbl_agent` (`id`, `name`, `email`, `phone_no`, `address`, `city`, `branch`, `user_name`, `password`, `image`, `status`) VALUES
+(1, 'Waiz Ali', 'waiz@gmail.com', '01234', '', '', 1, 'waizali', '1234', '', 'Not working'),
+(2, 'Maaz Khan', 'maaz@gmail.com', '01234', '', '', 2, 'maazkhan', '1234', '', 'Not working'),
+(3, 'Saleem Khan', 'saleem@gmail.com', '01234', '', '', 3, 'saleemkhan', '1234', '', 'Not Working'),
+(4, 'Ahmed Khan', 'ahmed@gmail.com', '03123', '', '', 2, 'ahmedkhan', '1234', 'assassin-s-creed-iv-black-flag.jpg', 'Not working');
 
 -- --------------------------------------------------------
 
@@ -196,7 +198,7 @@ ALTER TABLE `tbl_service`
 -- AUTO_INCREMENT for table `tbl_agent`
 --
 ALTER TABLE `tbl_agent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_branch`

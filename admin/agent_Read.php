@@ -99,7 +99,7 @@ if (isset($_SESSION["msg"])) {
                               <?php echo $row["password"] ?>
                             </td>
                             <td>
-                             <img src="<?php echo $row["image"] ?>" alt="">  
+                              <img src="uploads/<?php echo $row["image"] ?>" alt="">
                             </td>
                             <td>
                               <?php echo $row["status"] ?>

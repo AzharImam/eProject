@@ -35,14 +35,12 @@ require_once "sidebar.php";
                                         <div class="row mb-3">
                                             <div class="col">
                                                 <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" name="aname"
-                                                    placeholder="Enter name">
+                                                <input type="text" class="form-control" name="aname" placeholder="Enter name">
                                             </div>
 
                                             <div class="col">
                                                 <label class="form-label">Email</label>
-                                                <input type="text" class="form-control" name="aemail"
-                                                    placeholder="Enter email">
+                                                <input type="text" class="form-control" name="aemail" placeholder="Enter email">
                                             </div>
                                         </div>
                                         <!-- <div class="row mb-3">
@@ -60,8 +58,7 @@ require_once "sidebar.php";
                                             </div> -->
                                             <div class="col-6">
                                                 <label class="form-label">Phone no</label>
-                                                <input type="text" class="form-control" name="aphone"
-                                                    placeholder="Enter phone no">
+                                                <input type="text" class="form-control" name="aphone" placeholder="Enter phone no">
                                             </div>
 
                                             <div class="col">
@@ -73,17 +70,17 @@ require_once "sidebar.php";
                                                     $run_query = mysqli_query($connect, $fetch_branch);
                                                     if (mysqli_num_rows($run_query) > 0) {
                                                         while ($data = mysqli_fetch_array($run_query)) {
-                                                            ?>
+                                                    ?>
 
                                                             <option value="<?php echo $data[0] ?>">
                                                                 <?php echo $data[1] ?>
                                                             </option>
-                                                            <?php
+                                                        <?php
                                                         }
                                                         # code...
                                                     } else { ?>
                                                         <option value="">No Branch Found</option>
-                                                        <?php
+                                                    <?php
                                                     }
 
 
@@ -96,21 +93,18 @@ require_once "sidebar.php";
                                         <div class="row mb-3">
                                             <div class="col">
                                                 <label class="form-label">User name</label>
-                                                <input type="text" class="form-control" name="ausername"
-                                                    placeholder="Enter username">
+                                                <input type="text" class="form-control" name="ausername" placeholder="Enter username">
                                             </div>
 
                                             <div class="col">
                                                 <label class="form-label">Password</label>
-                                                <input type="text" class="form-control" name="apassword"
-                                                    placeholder="Enter password">
+                                                <input type="text" class="form-control" name="apassword" placeholder="Enter password">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-6">
                                                 <label class="form-label">Image</label>
-                                                <input type="file" class="form-control" name="aimage"
-                                                    placeholder="Upload image" id="aimage">
+                                                <input type="file" class="form-control" name="aimage" placeholder="Upload image" id="aimage">
                                             </div>
 
                                         </div>
@@ -143,54 +137,6 @@ require_once "sidebar.php";
 
 </html>
 <?php
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["aimage"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["aimage"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-}
-
-// Check if file already exists
-if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
-  $uploadOk = 0;
-}
-
-// Check file size
-if ($_FILES["aimage"]["size"] > 500000) {
-  echo "Sorry, your file is too large.";
-  $uploadOk = 0;
-}
-
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-  $uploadOk = 0;
-}
-
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-  if (move_uploaded_file($_FILES["aimage"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["aimage"]["name"])). " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-  }
-}
-?><?php
 if (isset($_POST['submit'])) {
     $aname = $_POST['aname'];
     $aemail = $_POST['aemail'];
@@ -200,7 +146,7 @@ if (isset($_POST['submit'])) {
     $abranch = $_POST['abranch'];
     $ausername = $_POST['ausername'];
     $apassword = $_POST['apassword'];
-    $aimage = $_POST['aimage'];
+    $aimage = $_FILES['aimage']['name'];
 
 
     $insert_query = "INSERT INTO `tbl_agent`(`name`, `email`, `phone_no`, `branch`, `user_name`, `password`, `image`) VALUES ('$aname','$aemail','$aphone','$abranch','$ausername','$apassword','$aimage')";
@@ -208,6 +154,55 @@ if (isset($_POST['submit'])) {
     $execute_query = mysqli_query($connect, $insert_query);
 
     if ($execute_query) {
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["aimage"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Check if image file is a actual image or fake image
+        if (isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["aimage"]["tmp_name"]);
+            if ($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+        }
+
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+
+        // Check file size
+        if ($_FILES["aimage"]["size"] > 500000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if (
+            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif"
+        ) {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["aimage"]["tmp_name"], $target_file)) {
+                echo "The file " . htmlspecialchars(basename($_FILES["aimage"]["name"])) . " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
         $_SESSION["msg"] = "Agent added successfully";
         header("Location: agent_Read.php");
     } else {
