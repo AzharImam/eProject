@@ -17,15 +17,12 @@ if (isset($_POST['submit'])) {
     $receiver_phone_no = $_POST['receiver_phone_no'];
     $receiver_email = $_POST['receiver_email'];
     $no_of_parcel = $_POST['no_of_parcel'];
-    $parcel_length = $_POST['parcel_length'];
-    $parcel_width = $_POST['parcel_width'];
-    $parcel_height = $_POST['parcel_height'];
     $parcel_weight = $_POST['parcel_weight'];
     $description = $_POST['description'];
     $delivery_charges = $_POST['delivery_charges'];
     $total_charges = $_POST['total_charges'];
 
-    $update_query = "UPDATE `tbl_courier` SET `track_number`='$track_number',`branch_id`='$branch_id',`shipment_date`='$shipment_date',`sender_name`='$sender_name',`sender_city`='$sender_city',`sender_address`='$sender_address',`sender_phone_no`='$sender_phone_no',`sender_email`='$sender_email',`receiver_name`='$receiver_name',`receiver_city`='$receiver_city',`receiver_address`='$receiver_address',`receiver_phone_no`='$receiver_phone_no',`receiver_email`='$receiver_email',`no_of_parcel`='$no_of_parcel',`parcel_length`='$parcel_length',`parcel_width`='$parcel_width',`parcel_height`='$parcel_height',`parcel_weight`='$parcel_weight',`description`='$description',`delivery_charges`='$delivery_charges',`total_charges`='$total_charges' WHERE `id`='$id'";
+    $update_query = "UPDATE `tbl_courier` SET `shipment_date`='$shipment_date',`sender_name`='$sender_name',`sender_city`='$sender_city',`sender_address`='$sender_address',`sender_phone_no`='$sender_phone_no',`sender_email`='$sender_email',`receiver_name`='$receiver_name',`receiver_city`='$receiver_city',`receiver_address`='$receiver_address',`receiver_phone_no`='$receiver_phone_no',`receiver_email`='$receiver_email',`no_of_parcel`='$no_of_parcel',`parcel_weight`='$parcel_weight',`description`='$description',`delivery_charges`='$delivery_charges',`total_charges`='$total_charges' WHERE `id`='$id'";
 
     $execute_query = mysqli_query($connect, $update_query);
 
@@ -79,31 +76,64 @@ $row = mysqli_fetch_assoc($execute_select);
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">Track number</label>
-                                                        <input type="number" min="0" class="form-control"
-                                                            name="track_number"
-                                                            value="<?php echo $row['track_number'] ?>" placeholder="">
+                                                        <?php
+                                                        $t1_query = "SELECT * FROM `tbl_tracking` WHERE id = $row[id]";
+                                                        $t2_execute = mysqli_query($connect, $t1_query);
+                                                        $t3_check_row = mysqli_num_rows($t2_execute);
+                                                        if ($t3_check_row > 0) {
+                                                            $t4 = mysqli_fetch_assoc($t2_execute); ?>
+                                                            <input type="text" class="form-control" value="<?php echo $t4["track_no"]; ?>" readonly>
+                                                        <?php  } else { ?>
+                                                            <option value="">No Track number Found</option>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </div>
 
                                                     <div class="col">
-                                                        <label class="form-label">Branch id/name</label>
-                                                        <input type="text" class="form-control" name="branch_id"
-                                                            value="<?php echo $row['branch_id'] ?>" placeholder="">
+                                                        <label class="form-label">Branch</label>
+                                                        <?php
+                                                        $fetch_branch = "SELECT * FROM `tbl_branch` WHERE id = '$row[id]'";
+                                                        $run_query = mysqli_query($connect, $fetch_branch);
+                                                        if (mysqli_num_rows($run_query) > 0) {
+                                                            $data = mysqli_fetch_array($run_query); ?>
+                                                            <input type="text" class="form-control" value="<?php echo $data[1] ?>" readonly>
+                                                        <?php  } else { ?>
+                                                            <option value="">No Branch Found</option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Service</label>
+                                                        <?php
+                                                        $fetch_branch = "SELECT * FROM `tbl_service` where id = '$row[id]'";
+                                                        $run_query = mysqli_query($connect, $fetch_branch);
+                                                        if (mysqli_num_rows($run_query) > 0) {
+                                                            $data = mysqli_fetch_array($run_query)
+
+                                                        ?> <input type="text" class="form-control" name="sender_name" value="<?php echo $data[1] ?>" placeholder="" readonly>
+
+
+                                                        <?php   } else { ?>
+                                                            <option value="">No Service Found</option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Date</label>
+                                                        <input type="date" id="date" class="form-control" name="shipment_date" value="<?php echo $row['shipment_date'] ?>">
+
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col">
-                                                        <label class="form-label">Shipment date</label>
-                                                        <input type="datetime-local" class="form-control"
-                                                            name="shipment_date"
-                                                            value="<?php echo $row['shipment_date'] ?>" placeholder="">
-                                                    </div>
-
-                                                    <div class="col">
                                                         <label class="form-label">Sender name</label>
-                                                        <input type="text" class="form-control" name="sender_name"
-                                                            value="<?php echo $row['sender_name'] ?>" placeholder="">
+                                                        <input type="text" class="form-control" name="sender_name" value="<?php echo $row['sender_name'] ?>">
                                                     </div>
                                                     <div class="col">
+                                                        <label class="form-label">Sender city</label>
                                                         <label class="form-label">Sender city</label>
                                                         <select name="sender_city" id="" required class="form-control">
                                                             <option value="<?php echo $row['sender_city'] ?>" selected>
@@ -123,35 +153,28 @@ $row = mysqli_fetch_assoc($execute_select);
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">Sender address</label>
-                                                        <input type="text" class="form-control" name="sender_address"
-                                                            value="<?php echo $row['sender_address'] ?>" placeholder="">
+                                                        <input type="text" class="form-control" name="sender_address" value="<?php echo $row['sender_address'] ?>">
                                                     </div>
                                                     <div class="col">
                                                         <label class="form-label">Sender phone no</label>
-                                                        <input type="tel" class="form-control" name="sender_phone_no"
-                                                            value="<?php echo $row['sender_phone_no'] ?>"
-                                                            placeholder="">
+                                                        <input type="tel" class="form-control" name="sender_phone_no" value="<?php echo $row['sender_phone_no'] ?>">
                                                     </div>
                                                 </div>
-
+                                                <div class="row mb-3">
+                                                    <div class="col-6">
+                                                        <label class="form-label">Sender email</label>
+                                                        <input type="text" class="form-control" name="sender_email" value="<?php echo $row['sender_email'] ?>">
+                                                    </div>
+                                                </div>
                                                 <div class="row mb-3">
                                                     <div class="col">
-                                                        <label class="form-label">Sender email</label>
-                                                        <input type="text" class="form-control" name="sender_email"
-                                                            value="<?php echo $row['sender_email'] ?>" placeholder="">
-                                                    </div>
-
-                                                    <div class="col">
                                                         <label class="form-label">Receiver name</label>
-                                                        <input type="text" class="form-control" name="receiver_name"
-                                                            value="<?php echo $row['receiver_name'] ?>" placeholder="">
+                                                        <input type="text" class="form-control" name="receiver_name" value="<?php echo $row['receiver_name'] ?>">
                                                     </div>
                                                     <div class="col">
                                                         <label class="form-label">Receiver city</label>
-                                                        <select name="receiver_city" id="" required
-                                                            class="form-control">
-                                                            <option value="<?php echo $row['receiver_city'] ?>"
-                                                                selected><?php echo $row['receiver_city'] ?></option>
+                                                        <select name="receiver_city" id="" required class="form-control">
+                                                            <option value="<?php echo $row['receiver_city'] ?>" selected><?php echo $row['receiver_city'] ?></option>
                                                             <option value="Karachi">Karachi</option>
                                                             <option value="Lahore">Lahore</option>
                                                             <option value="Islamabad">Islamabad</option>
@@ -164,56 +187,32 @@ $row = mysqli_fetch_assoc($execute_select);
                                                         </select>
                                                     </div>
                                                 </div>
+
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">Receiver address</label>
-                                                        <input type="text" class="form-control" name="receiver_address"
-                                                            value="<?php echo $row['receiver_address'] ?>"
-                                                            placeholder="">
+                                                        <input type="text" class="form-control" name="receiver_address" value="<?php echo $row['receiver_address'] ?>">
                                                     </div>
 
                                                     <div class="col">
                                                         <label class="form-label">Receiver phone no</label>
-                                                        <input type="tel" class="form-control" name="receiver_phone_no"
-                                                            value="<?php echo $row['receiver_phone_no'] ?>"
-                                                            placeholder="">
+                                                        <input type="tel" class="form-control" name="receiver_phone_no" value="<?php echo $row['receiver_phone_no'] ?>">
                                                     </div>
-                                                    <div class="col">
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-6">
                                                         <label class="form-label">Receiver email</label>
-                                                        <input type="text" class="form-control" name="receiver_email"
-                                                            value="<?php echo $row['receiver_email'] ?>" placeholder="">
+                                                        <input type="text" class="form-control" name="receiver_email" value="<?php echo $row['receiver_email'] ?>">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">No of parcel</label>
-                                                        <input type="number" min="1" class="form-control"
-                                                            name="no_of_parcel"
-                                                            value="<?php echo $row['no_of_parcel'] ?>" placeholder="">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="form-label">Parcel length</label>
-                                                        <input type="number" min="1" class="form-control"
-                                                            name="parcel_length"
-                                                            value="<?php echo $row['parcel_length'] ?>" placeholder="">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="form-label">Parcel width</label>
-                                                        <input type="number" min="1" class="form-control"
-                                                            name="parcel_width"
-                                                            value="<?php echo $row['parcel_width'] ?>" placeholder="">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="form-label">Parcel height</label>
-                                                        <input type="number" min="1" class="form-control"
-                                                            name="parcel_height"
-                                                            value="<?php echo $row['parcel_height'] ?>" placeholder="">
+                                                        <input type="number" min="1" class="form-control" name="no_of_parcel" value="<?php echo $row['no_of_parcel'] ?>">
                                                     </div>
                                                     <div class="col">
                                                         <label class="form-label">Parcel weight</label>
-                                                        <input type="number" min="1" class="form-control"
-                                                            name="parcel_weight"
-                                                            value="<?php echo $row['parcel_weight'] ?>" placeholder="">
+                                                        <input type="number" min="1" class="form-control" name="parcel_weight" value="<?php echo $row['parcel_weight'] ?>">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
@@ -221,28 +220,21 @@ $row = mysqli_fetch_assoc($execute_select);
                                                 <div class="row mb-3">
                                                     <div class="col-6">
                                                         <label class="form-label">Description</label>
-                                                        <input type="text" class="form-control" name="description"
-                                                            value="<?php echo $row['description'] ?>" placeholder="">
+                                                        <input type="text" class="form-control" name="description" value="<?php echo $row['description'] ?>">
                                                     </div>
 
                                                     <div class="col">
                                                         <label class="form-label">Delivery charges</label>
-                                                        <input type="number" min="150" class="form-control"
-                                                            name="delivery_charges"
-                                                            value="<?php echo $row['delivery_charges'] ?>"
-                                                            placeholder="">
+                                                        <input type="number" min="150" class="form-control" name="delivery_charges" value="<?php echo $row['delivery_charges'] ?>">
                                                     </div>
                                                     <div class="col">
                                                         <label class="form-label">Total charges</label>
-                                                        <input type="number" min="0" class="form-control"
-                                                            name="total_charges"
-                                                            value="<?php echo $row['total_charges'] ?>" placeholder="">
+                                                        <input type="number" min="0" class="form-control" name="total_charges" value="<?php echo $row['total_charges'] ?>">
                                                     </div>
                                                 </div>
 
                                                 <div>
-                                                    <button type="submit" class="btn btn-success"
-                                                        name="submit">Save</button>
+                                                    <button type="submit" class="btn btn-success" name="submit">Update</button>
                                                     <a href="courier_Read.php" class="btn btn-danger">Cancel</a>
                                                 </div>
                                             </form>
