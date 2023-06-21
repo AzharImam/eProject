@@ -142,7 +142,7 @@ session_start();
                         </ul>
                     </li>
                     <li>
-                        <a href="widgets.html"> <i class="menu-icon fa fa-map"></i>Tracking </a>
+                        <a href="track_Read.php"> <i class="menu-icon fa fa-map"></i>Tracking </a>
                     </li>
                     <li>
                         <a href="widgets.html"> <i class="menu-icon fa fa-file"></i>Reports </a>

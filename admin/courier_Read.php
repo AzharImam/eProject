@@ -82,20 +82,16 @@ if (isset($_SESSION["msg"])) {
                               <?php echo $row["id"] ?>
                             </td>
                             <td>
+                              <!-- fetching `track_no` from tbl_tracking -->
                               <?php
-                              // Assuming you want to retrieve all track_no values
-                              $query = "SELECT track_no FROM tbl_tracking";
-                              $result = mysqli_query($connect, $query);
-
-                              ?>
-                              <?php
-                              // Assuming you want to display the track_no values
-                              $rowt = mysqli_fetch_assoc($result); {
-                                $trackNo = $rowt['track_no'];
-                                echo "$trackNo";
+                              $t1_query = "SELECT * FROM `tbl_tracking` WHERE ID = $row[id]";
+                              $t2_execute = mysqli_query($connect, $t1_query);
+                              $t3_check_row = mysqli_num_rows($t2_execute);
+                              if ($t3_check_row > 0) {
+                                $t4 = mysqli_fetch_assoc($t2_execute);
+                                echo $t4["track_no"];
                               }
                               ?>
-
                             </td>
                             <td>
                               <?php echo $row["sender_name"] ?>
@@ -110,19 +106,8 @@ if (isset($_SESSION["msg"])) {
                               <?php echo $row["receiver_phone_no"] ?>
                             </td>
                             <td>
-                              <?php
-                              // Assuming you want to retrieve all status values
-                              $query = "SELECT status FROM tbl_tracking";
-                              $result = mysqli_query($connect, $query);
-
-                              ?>
-                              <?php
-                              // Assuming you want to display the status values
-                              $rowt = mysqli_fetch_assoc($result); {
-                                $status = $rowt['status'];
-                                echo " $status ";
-                              }
-                              ?>
+                              <!-- fetching `status` from tbl_tracking -->
+                              <?php echo $t4["status"]; ?>
                             </td>
                             <td>
                               <?php echo number_format($row["delivery_charges"], 2, '.', ',') . " Rs"; ?>
