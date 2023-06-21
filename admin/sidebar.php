@@ -19,18 +19,14 @@ session_start();
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
     <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -110,16 +106,14 @@ session_start();
                         </ul>
                     </li> -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Courier</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Courier</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-edit"></i><a href="courier_Create.php">Add courier</a></li>
                             <li><i class="fa fa-info"></i><a href="courier_Read.php">Courier details</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-industry"></i>Branches</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-industry"></i>Branches</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-edit"></i><a href="branch_Create.php">Add branches</a></li>
                             <li><i class="menu-icon fa fa-info"></i><a href="branch_Read.php">Branches details</a>
@@ -128,30 +122,25 @@ session_start();
                     </li>
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-user-secret"></i>Agent</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-secret"></i>Agent</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-edit"></i><a href="agent_Create.php">Add agent</a></li>
                             <li><i class="menu-icon fa fa-info"></i><a href="agent_Read.php">Agent details</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Services</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Services</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-edit"></i><a href="#">Add service</a></li>
-                            <li><i class="menu-icon fa fa-info"></i><a href="#">service details</a></li>
+                            <li><i class="menu-icon fa fa-edit"></i><a href="service_Create.php">Add service</a></li>
+                            <li><i class="menu-icon fa fa-info"></i><a href="service_Read.php">service details</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-address-book"></i>Contact</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-address-book"></i>Contact</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-info"></i><a href="contact_read.php">Contact details</a></li>
-                            <li><i class="menu-icon fa fa-info"></i><a href="#">example</a></li>
                         </ul>
                     </li>
-
                     <li>
                         <a href="widgets.html"> <i class="menu-icon fa fa-map"></i>Tracking </a>
                     </li>
@@ -160,8 +149,7 @@ session_start();
                     </li>
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
                             <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a>
@@ -190,43 +178,23 @@ session_start();
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.php"><img src="images/logo-admin.png" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="index.php"><img src="images/logo2.png" alt="Logo"></a>
-                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
-
             <div class="top-right">
                 <div class="header-menu">
                     <div class="header-left">
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
                             <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..."
-                                    aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
                                 <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                             </form>
                         </div>
 
-                        <!-- <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">3</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-check"></i>
-                                    <p>Server #1 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-info"></i>
-                                    <p>Server #2 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-warning"></i>
-                                    <p>Server #3 overloaded.</p>
-                                </a>
-                            </div>
-                        </div> -->
+                        <div class="dropdown for-notification">
+                            <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                        </div>
 
                         <!-- <div class="dropdown for-message">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -268,28 +236,26 @@ session_start();
                                     </div>
                                 </a>
                             </div>
-                        </div>
-                    </div> -->
-
-                        <div class="user-area dropdown float-right col-md-5 col-lg-5 mr-4 px-1 fs-6">
-                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
-                            </a>
-
-                            <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span
-                                        class="count">13</span></a>
-
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-                                <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
-                            </div>
-                        </div>
-
+                        </div> -->
                     </div>
+
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+
+                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
         </header>
         <!-- /#header -->
