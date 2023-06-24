@@ -3,8 +3,6 @@ ob_start();
 require_once "sidebar.php";
 $id = $_GET['id'];
 if (isset($_POST['submit'])) {
-    $track_number = $_POST['track_number'];
-    $branch_id = $_POST['branch_id'];
     $shipment_date = $_POST['shipment_date'];
     $sender_name = $_POST['sender_name'];
     $sender_city = $_POST['sender_city'];
@@ -21,18 +19,36 @@ if (isset($_POST['submit'])) {
     $description = $_POST['description'];
     $delivery_charges = $_POST['delivery_charges'];
     $total_charges = $_POST['total_charges'];
+    $status = $_POST['status'];
 
-    $update_query = "UPDATE `tbl_courier` SET `shipment_date`='$shipment_date',`sender_name`='$sender_name',`sender_city`='$sender_city',`sender_address`='$sender_address',`sender_phone_no`='$sender_phone_no',`sender_email`='$sender_email',`receiver_name`='$receiver_name',`receiver_city`='$receiver_city',`receiver_address`='$receiver_address',`receiver_phone_no`='$receiver_phone_no',`receiver_email`='$receiver_email',`no_of_parcel`='$no_of_parcel',`parcel_weight`='$parcel_weight',`description`='$description',`delivery_charges`='$delivery_charges',`total_charges`='$total_charges' WHERE `id`='$id'";
+    $update_query = "UPDATE `tbl_courier` SET `shipment_date`='$shipment_date',`sender_name`='$sender_name',`sender_city`='$sender_city',`sender_address`='$sender_address',`sender_phone_no`='$sender_phone_no',`sender_email`='$sender_email',`receiver_name`='$receiver_name',`receiver_city`='$receiver_city',`receiver_address`='$receiver_address',`receiver_phone_no`='$receiver_phone_no',`receiver_email`='$receiver_email',`no_of_parcel`='$no_of_parcel',`parcel_weight`='$parcel_weight',`description`='$description',`delivery_charges`='$delivery_charges',`total_charges`='$total_charges' WHERE `id`='$id';";
+    $query = "UPDATE tbl_tracking SET status = '$status' WHERE id = $id";
 
-    $execute_query = mysqli_query($connect, $update_query);
+    // Execute the combined query
+    $result = mysqli_multi_query($connect, $update_query . $query);
 
-    if ($execute_query) {
+    // Check if the query executed successfully
+    if ($result) {
+        // Consume the result set of the previous query
+        while (mysqli_next_result($connect)) {
+            if (!mysqli_more_results($connect)) {
+                break;
+            }
+            if (!$result = mysqli_store_result($connect)) {
+                echo "Error consuming result set: " . mysqli_error($connect);
+                break;
+            }
+            mysqli_free_result($result);
+        }
+
         $_SESSION["msg"] = "Data updated";
         header("Location: courier_Read.php");
+        exit();
     } else {
-        echo "Failed: " . mysqli_error($connect);
+        echo "Error updating data: " . mysqli_error($connect);
     }
 }
+
 //Select query to show data in form field
 $select_query = "SELECT * FROM `tbl_courier` WHERE id = $id LIMIT 1";
 $execute_select = mysqli_query($connect, $select_query);
@@ -232,7 +248,34 @@ $row = mysqli_fetch_assoc($execute_select);
                                                         <input type="number" min="0" class="form-control" name="total_charges" value="<?php echo $row['total_charges'] ?>">
                                                     </div>
                                                 </div>
+                                                <div class="row mb-3">
+                                                    <?php
+                                                    // Fetch the status from tbl_tracking for a specific tbl_courier ID
+                                                    $select_query = "SELECT t.status FROM tbl_tracking t INNER JOIN tbl_courier c ON t.courier_id = c.id WHERE c.id = '$id'";
+                                                    $select_result = mysqli_query($connect, $select_query);
 
+                                                    if ($select_result && mysqli_num_rows($select_result) > 0) {
+                                                        $row = mysqli_fetch_assoc($select_result);
+                                                        $status = $row['status'];
+                                                    } else {
+                                                        // Handle the case when no data is found for the provided ID or there's an error in the query
+                                                        $status = 'pending'; // Default status if not found or error
+                                                    }
+                                                    ?>
+
+                                                    <!-- Your HTML form code here -->
+
+                                                    <div class="col-6">
+                                                        <label class="form-label">Status</label>
+                                                        <select name="status" class="form-control">
+                                                            <option value="pending" <?php if ($status == "pending") echo "selected"; ?>>Pending</option>
+                                                            <option value="out_for_delivery" <?php if ($status == "out_for_delivery") echo "selected"; ?>>Out for Delivery</option>
+                                                            <option value="delivered" <?php if ($status == "delivered") echo "selected"; ?>>Delivered</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                </div>
                                                 <div>
                                                     <button type="submit" class="btn btn-success" name="submit">Update</button>
                                                     <a href="courier_Read.php" class="btn btn-danger">Cancel</a>

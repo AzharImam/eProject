@@ -78,6 +78,44 @@ session_start();
         #cellPaiChart {
             height: 160px;
         }
+
+        /* search-work */
+        /* Style for the form container */
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+
+        /* Style for form elements */
+        .form-container input[type="text"],
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Style for submit button */
+        .form-container button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Style for submit button on hover */
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* /search-work */
     </style>
 </head>
 
@@ -184,15 +222,7 @@ session_start();
             <div class="top-right">
                 <div class="header-menu">
                     <div class="header-left">
-                        <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>
-
-                        <div class="dropdown for-notification">
+                        <div style="position: relative; top: 50%; transform: translateY(-50%);">
                             <p>Welcome <?php echo $_SESSION['username']; ?></p>
                         </div>
 
@@ -245,11 +275,11 @@ session_start();
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                            <!-- <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a> -->
 
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                            <!-- <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a> -->
 
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                            <!-- <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a> -->
 
                             <a class="nav-link" href="logout.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>

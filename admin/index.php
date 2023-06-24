@@ -115,58 +115,79 @@ if (!isset($_SESSION['username'])) {
             </div>
         </div>
         <!-- /Widgets -->
-        <!--  Traffic  -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="box-title">Traffic </h4>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="card-body">
-                                <!-- <canvas id="TrafficChart"></canvas>   -->
-                                <div id="traffic-chart" class="traffic-chart"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card-body">
-                                <div class="progress-box progress-1">
-                                    <h4 class="por-title">Visits</h4>
-                                    <div class="por-txt">96,930 Users (40%)</div>
-                                    <div class="progress mb-2" style="height: 5px;">
-                                        <div class="progress-bar bg-flat-color-1" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="progress-box progress-2">
-                                    <h4 class="por-title">Bounce Rate</h4>
-                                    <div class="por-txt">3,220 Users (24%)</div>
-                                    <div class="progress mb-2" style="height: 5px;">
-                                        <div class="progress-bar bg-flat-color-2" role="progressbar" style="width: 24%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="progress-box progress-2">
-                                    <h4 class="por-title">Unique Visitors</h4>
-                                    <div class="por-txt">29,658 Users (60%)</div>
-                                    <div class="progress mb-2" style="height: 5px;">
-                                        <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="progress-box progress-2">
-                                    <h4 class="por-title">Targeted Visitors</h4>
-                                    <div class="por-txt">99,658 Users (90%)</div>
-                                    <div class="progress mb-2" style="height: 5px;">
-                                        <div class="progress-bar bg-flat-color-4" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div> <!-- /.card-body -->
-                        </div>
-                    </div> <!-- /.row -->
-                    <div class="card-body"></div>
-                </div>
-            </div><!-- /# column -->
+        <!--  Search-Work  -->
+        <div class="form-container">
+            <form method="GET" action="index.php">
+                <input type="text" name="search_query" placeholder="Enter search query">
+                <select name="search_option">
+                    <option value="tracking_number">Tracking Number</option>
+                    <option value="sender_email">Sender Email</option>
+                    <option value="sender_name">Sender Name</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
         </div>
-        <!--  /Traffic -->
+        <?php
+        // Check if the form is submitted
+        if (isset($_GET['search_query']) && isset($_GET['search_option'])) {
+            $searchQuery = $_GET['search_query'];
+            $searchOption = $_GET['search_option'];
+
+            // Perform the search based on the selected option
+            if ($searchOption === 'tracking_number') {
+                // Search by tracking number
+                $query = "SELECT tbl_tracking.track_no, tbl_courier.sender_email, tbl_courier.sender_name, tbl_tracking.status
+              FROM tbl_tracking 
+              INNER JOIN tbl_courier ON tbl_tracking.courier_id = tbl_courier.id 
+              WHERE tbl_tracking.track_no = '$searchQuery'";
+            } elseif ($searchOption === 'sender_email') {
+                // Search by sender email
+                $query = "SELECT tbl_tracking.track_no, tbl_courier.sender_email, tbl_courier.sender_name, tbl_tracking.status
+              FROM tbl_tracking 
+              INNER JOIN tbl_courier ON tbl_tracking.courier_id = tbl_courier.id 
+              WHERE tbl_courier.sender_email = '$searchQuery'";
+            } elseif ($searchOption === 'sender_name') {
+                // Search by sender name
+                $query = "SELECT tbl_tracking.track_no, tbl_courier.sender_email, tbl_courier.sender_name, tbl_tracking.status
+              FROM tbl_tracking 
+              INNER JOIN tbl_courier ON tbl_tracking.courier_id = tbl_courier.id 
+              WHERE tbl_courier.sender_name = '$searchQuery'";
+            }
+
+            // Execute the query only if it has been defined
+            if (isset($query)) {
+                // Execute the query and fetch the results
+                $result = mysqli_query($connect, $query);
+
+                // Check if any results are returned
+                if (mysqli_num_rows($result) > 0) {
+                    // Loop through the results and display them
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        // Display the tracking number
+                        echo "Tracking Number: " . $row['track_no'] . "<br>";
+
+                        // Display the sender email
+                        echo "Sender Email: " . $row['sender_email'] . "<br>";
+
+                        // Display the sender name
+                        echo "Sender Name: " . $row['sender_name'] . "<br>";
+
+                        // Display the status
+                        echo "Status: " . $row['status'] . "<br>";
+
+                        echo "<hr>";
+                    }
+                } else {
+                    echo "No results found.";
+                }
+
+                // Free the result set
+                mysqli_free_result($result);
+            }
+        }
+        ?>
+        <!--  /Search-Work -->
+
         <div class="clearfix"></div>
         <!-- Orders -->
         <div class="orders">
