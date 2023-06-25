@@ -84,7 +84,7 @@ if (isset($_SESSION["msg"])) {
                             <td>
                               <!-- fetching `track_no` from tbl_tracking -->
                               <?php
-                              $t1_query = "SELECT * FROM `tbl_tracking` WHERE ID = $row[id]";
+                              $t1_query = "SELECT * FROM `tbl_tracking` WHERE courier_id = $row[id]";
                               $t2_execute = mysqli_query($connect, $t1_query);
                               $t3_check_row = mysqli_num_rows($t2_execute);
                               if ($t3_check_row > 0) {
