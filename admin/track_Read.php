@@ -1,6 +1,17 @@
 <?php
 require_once "sidebar.php";
 ?>
+<?php
+if (isset($_SESSION["msg"])) {
+    $msg = $_SESSION["msg"];
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+      ' . $msg . '
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+
+    unset($_SESSION["msg"]);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +45,6 @@ require_once "sidebar.php";
                                         <thead class="table-success">
                                             <tr>
                                                 <th scope="col">ID</th>
-                                                <th scope="col">Courier id</th>
                                                 <th scope="col">Track number</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col"></th>
@@ -54,13 +64,14 @@ require_once "sidebar.php";
                                                             <?php echo $row["id"] ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $row["courier_id"] ?>
-                                                        </td>
-                                                        <td>
                                                             <?php echo $row["track_no"] ?>
                                                         </td>
                                                         <td>
                                                             <?php echo $row["status"] ?>
+                                                        </td>
+
+                                                        <td>
+                                                            <a href="track_Update.php?id=<?php echo $row["courier_id"] ?>" class="link-dark"><i class="fa fa-refresh fs-5 me-3" style="color: green"></i></a>
                                                         </td>
                                                     </tr>
                                             <?php

@@ -294,9 +294,13 @@ if (isset($_POST['submit'])) {
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Courier Received';
-            $mail->Body    = 'Dear customer, your courier has been received and is being processed.';
-            $mail->Body    = 'Dear ' . $receiver_name . ', your courier with tracking number <b>' . $track_number . '</b> has been received and is being processed.';
-
+            $mail->Body = 'Dear ' . $receiver_name . ', 
+            We have received your courier with tracking number ' . $track_number . ' and wanted to inform you of its safe arrival. 
+            Thank you for choosing our services. 
+            If you have any questions or need further assistance, please do not hesitate to contact us. 
+            
+            Best regards,
+            [Courier Management System]';
 
             $mail->send();
             echo 'Message has been sent';
